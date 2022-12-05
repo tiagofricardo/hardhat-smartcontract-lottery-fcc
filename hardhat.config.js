@@ -20,8 +20,11 @@ module.exports = {
         goerli: {
             url: GOERLI_RPC_URL,
             accounts: [PRIVATE_KEY],
-            chaindId: 5,
+            chainId: 5,
             blockConfirmations: 6,
+        },
+        localhost: {
+            chainId: 31337,
         },
     },
     gasReporter: {

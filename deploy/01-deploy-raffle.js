@@ -6,7 +6,7 @@ const { verify } = require("../utils/verify")
 module.exports = async function ({ getNamedAccounts, deployments }) {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
-    const chaindId = network.config.chaindId
+    const chainId = network.config.chainId
     let vrfcoordinatorV2Address, subscriptionId, VRFCoordinatorV2Mock
 
     if (developmentChains.includes(network.name)) {
@@ -17,14 +17,14 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         subscriptionId = transactionReceipt.events[0].args.subId
         await VRFCoordinatorV2Mock.fundSubscription(subscriptionId, VRF_SUB_FUND_AMOUNT)
     } else {
-        vrfcoordinatorV2Address = networkConfig[chaindId]["vrfCoordinatorV2"]
-        subscriptionId = networkConfig[chaindId]["subscriptionId"]
+        vrfcoordinatorV2Address = networkConfig[chainId]["vrfCoordinatorV2"]
+        subscriptionId = networkConfig[chainId]["subscriptionId"]
     }
 
-    const entranceFee = networkConfig[chaindId]["entranceFee"]
-    const gasLane = networkConfig[chaindId]["gasLane"]
-    const callbackGasLimit = networkConfig[chaindId]["callbackGasLimit"]
-    const interval = networkConfig[chaindId]["interval"]
+    const entranceFee = networkConfig[chainId]["entranceFee"]
+    const gasLane = networkConfig[chainId]["gasLane"]
+    const callbackGasLimit = networkConfig[chainId]["callbackGasLimit"]
+    const interval = networkConfig[chainId]["interval"]
 
     const args = [
         vrfcoordinatorV2Address,
